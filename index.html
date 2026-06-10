@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>REC</title>
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  font-family:sans-serif;
+}
+
+#start{
+  font-size:2rem;
+  padding:20px;
+}
+
+video{
+  display:none;
+  width:100vw;
+  height:100vh;
+  object-fit:contain;
+  background:black;
+}
+</style>
+</head>
+
+<body>
+
+<div id="start">
+📹 REC<br><br>
+暗転したら画面をタップしてください
+</div>
+
+<video id="video" playsinline>
+  <source src="movie.mp4" type="video/mp4">
+</video>
+
+<script>
+const start = document.getElementById("start");
+const video = document.getElementById("video");
+
+document.body.addEventListener("click", () => {
+
+  start.style.display = "none";
+  video.style.display = "block";
+
+  video.play();
+
+}, { once:true });
+</script>
+
+</body>
+</html>

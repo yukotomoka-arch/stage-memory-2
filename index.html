@@ -17,19 +17,25 @@ body{
 }
 
 #start{
+    position:relative;
     height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+    width:100vw;
 }
 
-.rec{
+.topbar{
+    position:absolute;
+    top:20px;
+    left:20px;
+    right:20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    letter-spacing:0.15em;
+    opacity:.8;
+}
+
+.rec-indicator{
     color:red;
-    font-size:2rem;
-    letter-spacing:0.2em;
-    margin-bottom:20px;
     animation:blink 1s infinite;
 }
 
@@ -39,35 +45,90 @@ body{
     }
 }
 
-.cam{
-    font-size:1rem;
-    opacity:.7;
+.viewfinder{
+    position:absolute;
+    inset:60px 30px 120px 30px;
 }
 
-.ready{
-    margin-top:10px;
-    font-size:3rem;
-    letter-spacing:0.15em;
+.corner{
+    position:absolute;
+    width:35px;
+    height:35px;
 }
 
-.line{
-    width:80%;
-    max-width:500px;
-    border-top:1px solid #555;
-    margin:30px 0;
+.tl{
+    top:0;
+    left:0;
+    border-top:2px solid white;
+    border-left:2px solid white;
 }
 
-.desc{
-    font-size:1.1rem;
+.tr{
+    top:0;
+    right:0;
+    border-top:2px solid white;
+    border-right:2px solid white;
+}
+
+.bl{
+    bottom:0;
+    left:0;
+    border-bottom:2px solid white;
+    border-left:2px solid white;
+}
+
+.br{
+    bottom:0;
+    right:0;
+    border-bottom:2px solid white;
+    border-right:2px solid white;
+}
+
+.message{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    opacity:.6;
+    font-size:15px;
     line-height:1.8;
-    opacity:.9;
+    letter-spacing:.1em;
 }
 
-.tap{
-    margin-top:30px;
-    font-size:1rem;
-    letter-spacing:0.2em;
-    opacity:.7;
+#recButton{
+    position:absolute;
+    left:50%;
+    bottom:40px;
+    transform:translateX(-50%);
+    background:none;
+    border:none;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+}
+
+.dot{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:red;
+    margin-bottom:12px;
+    animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(.9);
+        opacity:.7;
+    }
+}
+
+.label{
+    letter-spacing:.2em;
+    font-size:14px;
 }
 
 video{
@@ -85,24 +146,26 @@ video{
 
 <div id="start">
 
-<div class="rec">● REC</div>
+    <div class="topbar">
+        <div><span class="rec-indicator">● REC</span></div>
+        <div>CAM 01</div>
+    </div>
 
-<div class="cam">CAM 01</div>
+    <div class="viewfinder">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+    </div>
 
-<div class="ready">READY</div>
+    <div class="message">
+        稽古映像を記録します
+    </div>
 
-<div class="line"></div>
-
-<div class="desc">
-稽古映像を記録します<br>
-暗転したら画面をタップしてください
-</div>
-
-<div class="line"></div>
-
-<div class="tap">
-TAP TO START RECORDING
-</div>
+    <button id="recButton">
+        <div class="dot"></div>
+        <div class="label">REC</div>
+    </button>
 
 </div>
 
@@ -114,15 +177,16 @@ TAP TO START RECORDING
 
 const start = document.getElementById("start");
 const video = document.getElementById("video");
+const recButton = document.getElementById("recButton");
 
-document.body.addEventListener("click", () => {
+recButton.addEventListener("click", () => {
 
     start.style.display = "none";
     video.style.display = "block";
 
     video.play();
 
-}, { once:true });
+});
 
 </script>
 

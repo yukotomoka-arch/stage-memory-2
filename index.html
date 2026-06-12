@@ -16,10 +16,41 @@ body{
     overflow:hidden;
 }
 
+/* 確認画面 */
+
+#intro{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.messageBox{
+    width:min(90%,500px);
+    text-align:center;
+    line-height:1.8;
+}
+
+.messageBox h2{
+    margin-bottom:30px;
+}
+
+.messageBox button{
+    margin-top:30px;
+    padding:12px 24px;
+    font-size:16px;
+    background:white;
+    border:none;
+    border-radius:8px;
+}
+
+/* REC画面 */
+
 #start{
     position:relative;
     height:100vh;
     width:100vw;
+    display:none;
 }
 
 .topbar{
@@ -144,6 +175,29 @@ video{
 
 <body>
 
+<!-- 確認画面 -->
+
+<div id="intro">
+
+    <div class="messageBox">
+
+        <h2>確認画面</h2>
+
+        <p>
+        係の案内があるまで<br>
+        この画面のままお待ちください
+        </p>
+
+        <button id="nextBtn">
+        確認しました
+        </button>
+
+    </div>
+
+</div>
+
+<!-- REC画面 -->
+
 <div id="start">
 
     <div class="topbar">
@@ -169,24 +223,35 @@ video{
 
 </div>
 
+<!-- 動画 -->
+
 <video id="video" playsinline>
     <source src="movie.mp4" type="video/mp4">
 </video>
 
 <script>
 
+const intro = document.getElementById("intro");
 const start = document.getElementById("start");
 const video = document.getElementById("video");
-const recButton = document.getElementById("recButton");
 
-recButton.addEventListener("click", () => {
+document.getElementById("nextBtn").onclick = () => {
+
+    intro.style.display = "none";
+
+    start.style.display = "block";
+
+};
+
+document.getElementById("recButton").onclick = () => {
 
     start.style.display = "none";
+
     video.style.display = "block";
 
     video.play();
 
-});
+};
 
 </script>
 

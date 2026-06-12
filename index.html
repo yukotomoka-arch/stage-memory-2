@@ -162,12 +162,17 @@ body{
     font-size:14px;
 }
 
+/* 動画 */
+
 video{
     display:none;
     width:100vw;
     height:100vh;
     object-fit:contain;
     background:black;
+
+    opacity:1;
+    transition:opacity 2s ease;
 }
 
 </style>
@@ -238,7 +243,6 @@ const video = document.getElementById("video");
 document.getElementById("nextBtn").onclick = () => {
 
     intro.style.display = "none";
-
     start.style.display = "block";
 
 };
@@ -252,6 +256,18 @@ document.getElementById("recButton").onclick = () => {
     video.play();
 
 };
+
+video.addEventListener("ended", () => {
+
+    video.style.opacity = "0";
+
+    setTimeout(() => {
+
+        video.style.display = "none";
+
+    }, 2000);
+
+});
 
 </script>
 

@@ -7,56 +7,123 @@
 <title>REC</title>
 
 <style>
+
 body{
-  margin:0;
-  background:black;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-  font-family:sans-serif;
+    margin:0;
+    background:#000;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    overflow:hidden;
 }
 
 #start{
-  font-size:2rem;
-  padding:20px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.rec{
+    color:red;
+    font-size:2rem;
+    letter-spacing:0.2em;
+    margin-bottom:20px;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:.3;
+    }
+}
+
+.cam{
+    font-size:1rem;
+    opacity:.7;
+}
+
+.ready{
+    margin-top:10px;
+    font-size:3rem;
+    letter-spacing:0.15em;
+}
+
+.line{
+    width:80%;
+    max-width:500px;
+    border-top:1px solid #555;
+    margin:30px 0;
+}
+
+.desc{
+    font-size:1.1rem;
+    line-height:1.8;
+    opacity:.9;
+}
+
+.tap{
+    margin-top:30px;
+    font-size:1rem;
+    letter-spacing:0.2em;
+    opacity:.7;
 }
 
 video{
-  display:none;
-  width:100vw;
-  height:100vh;
-  object-fit:contain;
-  background:black;
+    display:none;
+    width:100vw;
+    height:100vh;
+    object-fit:contain;
+    background:black;
 }
+
 </style>
 </head>
 
 <body>
 
 <div id="start">
-📹 REC<br><br>
+
+<div class="rec">● REC</div>
+
+<div class="cam">CAM 01</div>
+
+<div class="ready">READY</div>
+
+<div class="line"></div>
+
+<div class="desc">
+稽古映像を記録します<br>
 暗転したら画面をタップしてください
 </div>
 
+<div class="line"></div>
+
+<div class="tap">
+TAP TO START RECORDING
+</div>
+
+</div>
+
 <video id="video" playsinline>
-  <source src="movie.mp4" type="video/mp4">
+    <source src="movie.mp4" type="video/mp4">
 </video>
 
 <script>
+
 const start = document.getElementById("start");
 const video = document.getElementById("video");
 
 document.body.addEventListener("click", () => {
 
-  start.style.display = "none";
-  video.style.display = "block";
+    start.style.display = "none";
+    video.style.display = "block";
 
-  video.play();
+    video.play();
 
 }, { once:true });
+
 </script>
 
 </body>
